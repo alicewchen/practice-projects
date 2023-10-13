@@ -28,7 +28,7 @@ app.title = "Automobile Statistics Dashboard"
 # Create the dropdown menu options
 dropdown_options = [
     {"label": "Yearly Statistics", "value": "Yearly Statistics"},
-    {"label": "Recession Period Statistics", "value": "........."},
+    {"label": "Recession Period Statistics", "value": "Recession Period Statistics"},
 ]
 # List of years
 year_list = [i for i in range(1980, 2024, 1)]
@@ -68,7 +68,6 @@ app.layout = html.Div(
             dcc.Dropdown(
                 id="select-year",
                 options=[{"label": i, "value": i} for i in year_list],
-                # value=year_list,
                 placeholder="Select a year",
                 style={
                     "width": "80%",
@@ -235,7 +234,7 @@ def update_output_container(input_year, selected_statistics):
                 yas,
                 x="Year",
                 y="Automobile_Sales",
-                labels={"Year": "Year", "Automobile_Sales": "Total Sales Volume"},
+                labels={"Year": "Year", "Automobile_Sales": "Average Sales Volume"},
                 title=f"Yearly Automobile Sales from 1980-2023",
             )
         )
@@ -254,15 +253,18 @@ def update_output_container(input_year, selected_statistics):
         )
 
         # Plot bar chart for average number of vehicles sold during the given year
-        avg_sales_by_year = (
-            yearly_data.groupby("Year")["Automobile_Sales"].mean().reset_index()
+        avg_sales_by_vehicle = (
+            yearly_data.groupby("Vehicle_Type")["Automobile_Sales"].mean().reset_index()
         )
         Y_chart3 = dcc.Graph(
             figure=px.bar(
-                avg_sales_by_year,
-                x="Year",
+                avg_sales_by_vehicle,
+                x="Vehicle_Type",
                 y="Automobile_Sales",
-                labels={"Year": "Year", "Automobile_Sales": "Average Sales Volume"},
+                labels={
+                    "Vehicle_Type": "Vehicle Type",
+                    "Automobile_Sales": "Average Sales Volume",
+                },
                 title=f"Average Automobile Sales by Vehicle Type in {input_year}",
             )
         )
