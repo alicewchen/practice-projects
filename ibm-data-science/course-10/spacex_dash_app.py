@@ -118,7 +118,7 @@ def create_scatter_chart(site_dropdown, payload_slider):
             x="Payload Mass (kg)",
             y="class",
             labels={"class": "Launch Success"},
-            # color="Booster Version Category",
+            color="Booster Version Category",
             title="Correlation Between Payload and Success for All Sites",
         )
         return fig
@@ -133,7 +133,7 @@ def create_scatter_chart(site_dropdown, payload_slider):
             x="Payload Mass (kg)",
             y="class",
             labels={"class": "Launch Success"},
-            # color="Booster Version Category",
+            color="Booster Version Category",
             title="Correlation Between Payload and Success for " + site_dropdown,
         )
         return fig
